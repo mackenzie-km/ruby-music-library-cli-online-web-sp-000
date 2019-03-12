@@ -1,7 +1,11 @@
 require_relative "concerns/findable.rb"
+require_relative "concerns/nameable.rb"
+require_relative "concerns/persistable.rb"
+
 
 class Song  
 extend Concerns::Findable
+extend Nameable::
 
   attr_accessor :name
   attr_reader :artist, :genre
