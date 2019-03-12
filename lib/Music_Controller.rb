@@ -1,7 +1,7 @@
 class MusicLibraryController
   extend Concerns::Findable 
   require "pry"
-  
+
 def initialize(path = './db/mp3s')
   new_importer = MusicImporter.new(path)
   new_importer.import
@@ -84,10 +84,11 @@ def play_song
 puts "Which song number would you like to play?"
 number = gets.strip
 number = number.to_i
+
 if number >0 && number < Song.all.count
   element = Song.all.sort_by(&:name)[number-1] 
   puts "Playing #{element.name} by #{element.artist.name}"
 end 
 end 
 
-end 
+end

@@ -1,10 +1,10 @@
 class MusicImporter
   attr_accessor :path
-  
+
   def initialize(path)
     @path = path
   end 
-  
+
   def files
     mp3s = []
     @files = `ls #{@path}`
@@ -16,7 +16,7 @@ class MusicImporter
   end
     mp3s
   end 
-  
+
 def import
 files
 @files.each do |file|
@@ -24,4 +24,4 @@ files
 end
 end
 
-end 
+end  
