@@ -1,15 +1,11 @@
-require_relative "concerns/findable.rb"
-require_relative "concerns/nameable.rb"
-require_relative "concerns/persistable.rb"
-
 class MusicLibraryController
-  extend Findable::ClassMethods
+  extend Concerns::Findable
   require "pry"
 
 def initialize(path = './db/mp3s')
   new_importer = MusicImporter.new(path)
   new_importer.import
-end 
+end
 
 def call
 puts "Welcome to your music library!"
@@ -23,7 +19,7 @@ puts "To list all of the songs of a particular genre, enter 'list genre'."
 puts "To play a song, enter 'play song'."
 puts "To quit, type 'exit'."
 puts "What would you like to do?"
-input = gets.strip 
+input = gets.strip
 if input == "list songs"
   list_songs
 elsif input == "list artists"
@@ -36,53 +32,53 @@ elsif input == "list genre"
   list_songs_by_genre
 elsif input == "play song"
   play_song
-end 
 end
-end 
+end
+end
 
 def list_songs
 i = 1
 Song.all.sort_by(&:name).each do |song|
     puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     i += 1
-end 
-end 
+end
+end
 
-def list_artists 
+def list_artists
 i = 1
 Artist.all.sort_by{|artist| artist.name}.each do |artist|
     puts "#{i}. #{artist.name}"
     i += 1
-end 
-end 
+end
+end
 
-def list_genres 
+def list_genres
 i = 1
 Genre.all.sort_by{|genre| genre.name}.each do |genre|
     puts "#{i}. #{genre.name}"
   i += 1
-end 
-end 
+end
+end
 
 def list_songs_by_artist
 puts "Please enter the name of an artist:"
 input = gets.strip
 found = Artist.find_by_name(input)
-if found != "" 
+if found != ""
   i = 0
   found.songs.sort_by{|s| s.name}.collect {|s| puts "#{i+=1}. #{s.name} - #{s.genre.name}"}
-end 
-end 
+end
+end
 
 def list_songs_by_genre
 puts "Please enter the name of a genre:"
 input = gets.strip
 found = Genre.find_by_name(input)
-if found != "" 
+if found != ""
   i = 0
   found.songs.sort_by{|s| s.name}.collect {|s| puts "#{i+=1}. #{s.artist.name} - #{s.name}"}
-end 
-end 
+end
+end
 
 def play_song
 puts "Which song number would you like to play?"
@@ -90,9 +86,9 @@ number = gets.strip
 number = number.to_i
 
 if number >0 && number < Song.all.count
-  element = Song.all.sort_by(&:name)[number-1] 
+  element = Song.all.sort_by(&:name)[number-1]
   puts "Playing #{element.name} by #{element.artist.name}"
-end 
-end 
+end
+end
 
 end
