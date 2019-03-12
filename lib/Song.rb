@@ -1,58 +1,54 @@
 require_relative "concerns/findable.rb"
-require_relative "concerns/nameable.rb"
-require_relative "concerns/persistable.rb"
 
-
-class Song  
-extend Findable::ClassMethods
-
+class Song
+extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
-  @@all = [] 
+  @@all = []
 
 def name=(name)
-    @name = name 
-end 
+    @name = name
+end
 
 def self.all
     @@all
-end 
+end
 
-def self.destroy_all 
-    @@all.clear 
-end 
+def self.destroy_all
+    @@all.clear
+end
 
 def self.create(name)
   item = self.new(name)
-end 
+end
 
-def save 
-    @@all << self 
-end 
+def save
+    @@all << self
+end
 
   def initialize(name = nil, artist = nil, genre = nil)
-    if name !=nil 
-      @name = name 
-    end 
+    if name !=nil
+      @name = name
+    end
     if artist.is_a?(Artist)
       self.artist=(artist)
-    end 
+    end
     if genre.is_a?(Genre)
       self.genre=(genre)
-    end 
-    self.save 
+    end
+    self.save
   end
 
   def genre=(genre)
-    if self.genre == nil 
-      @genre = genre 
-       @genre.songs << self 
-     end 
-  end 
+    if self.genre == nil
+      @genre = genre
+       @genre.songs << self
+     end
+  end
 
   def artist=(artist)
-    @artist = artist 
+    @artist = artist
     @artist.add_song(self)
   end
 
@@ -67,11 +63,11 @@ end
     new_artist.add_song(new_song)
     new_song.genre = Genre.find_or_create_by_name(new_genre)
     new_song
-  end 
+  end
 
   def self.create_from_filename(input)
     self.new_from_filename(input)
-  end 
+  end
 
 
 end
