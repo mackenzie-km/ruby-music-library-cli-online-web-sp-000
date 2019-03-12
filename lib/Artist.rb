@@ -1,58 +1,56 @@
 require_relative "concerns/findable.rb"
-require_relative "concerns/nameable.rb"
-require_relative "concerns/persistable.rb"
 
 class Artist
-  extend Findable::ClassMethods
+  extend Concerns::Findable
   attr_accessor :name, :songs
-  @@all = [] 
+  @@all = []
 
 def self.all
     @@all
-end 
+end
 
 def self.create(name)
   item = self.new(name)
   item.save
   item
-end 
+end
 
-def self.destroy_all 
-    @@all.clear 
-end 
+def self.destroy_all
+    @@all.clear
+end
 
 def name=(name)
-    @name = name 
-end 
+    @name = name
+end
 
-def save 
-    @@all << self 
-end 
+def save
+    @@all << self
+end
 
   def initialize(name = nil)
-    if name !=nil 
-      @name = name 
+    if name !=nil
+      @name = name
       @songs = []
-    end 
-  end 
+    end
+  end
 
   def add_song(song_name)
-    if song_name.artist == nil 
-      song_name.artist = self 
+    if song_name.artist == nil
+      song_name.artist = self
       @songs << song_name
-    end 
-  end 
+    end
+  end
 
   def genres
-    genres = [] 
+    genres = []
     Song.all.each do |song|
-      if song.artist == self 
+      if song.artist == self
        genres << song.genre
        genres.uniq!
-      end 
-    end 
-      genres 
-  end 
+      end
+    end
+      genres
+  end
 
 
 end
