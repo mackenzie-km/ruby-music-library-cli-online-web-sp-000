@@ -1,4 +1,6 @@
 require_relative "concerns/findable.rb"
+require_relative "concerns/nameable.rb"
+require_relative "concerns/persistable.rb"
 
 class Artist
   extend Concerns::Findable 
