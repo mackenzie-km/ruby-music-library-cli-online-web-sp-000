@@ -3,19 +3,19 @@ class MusicImporter
 
   def initialize(path)
     @path = path
-  end 
+  end
 
   def files
     mp3s = []
     @files = `ls #{@path}`
     @files = @files.split("\n")
-    @files.collect do |file| 
+    @files.collect do |file|
     if file.include?(".mp3")
       mp3s << file
     end
   end
     mp3s
-  end 
+  end
 
 def import
 files
