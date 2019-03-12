@@ -1,5 +1,5 @@
 class MusicLibraryController
-  extend Concerns::Findable 
+  extend Findable::ClassMethods
   require "pry"
 
 def initialize(path = './db/mp3s')
