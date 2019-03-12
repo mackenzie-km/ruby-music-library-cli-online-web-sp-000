@@ -5,7 +5,7 @@ require_relative "concerns/persistable.rb"
 
 class Song  
 extend Concerns::Findable
-extend Nameable::
+extend Nameable::ClassMethods
 
   attr_accessor :name
   attr_reader :artist, :genre
