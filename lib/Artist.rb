@@ -3,7 +3,7 @@ require_relative "concerns/nameable.rb"
 require_relative "concerns/persistable.rb"
 
 class Artist
-  extend Concerns::Findable 
+  extend Findable::ClassMethods
   attr_accessor :name, :songs
   @@all = [] 
 
