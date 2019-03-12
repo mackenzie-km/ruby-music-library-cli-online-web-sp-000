@@ -1,5 +1,5 @@
-module Concerns
 module Findable
+module ClassMethods
 
 def find_by_name(input)
   found_element = ""
